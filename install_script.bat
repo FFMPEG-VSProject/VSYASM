@@ -5,7 +5,7 @@ REM Defined cript variables
 set YASMDL=http://www.tortall.net/projects/yasm/releases
 set YASMVERSION=1.3.0
 set VSWHEREDL=https://github.com/Microsoft/vswhere/releases/download
-set VSWHEREVERSION=2.6.7
+set VSWHEREVERSION=2.8.4
 
 REM Store current directory and ensure working directory is the location of current .bat
 set CALLDIR=%CD%
@@ -81,7 +81,7 @@ for /f "usebackq tokens=1* delims=: " %%i in (`"%SCRIPTDIR%\vswhere.exe" -prerel
     for /f "delims=" %%a in ('echo %%j ^| find "2019"') do (
         if not "%%a"=="" (
             echo Visual Studio 2019 environment detected...
-            call "%~0" "16" "%%j"
+            call "%~0" "16" "%%i:%%j"
             if not ERRORLEVEL 1 (
                 set MSVC16=1
                 set MSVCFOUND=1
@@ -91,7 +91,7 @@ for /f "usebackq tokens=1* delims=: " %%i in (`"%SCRIPTDIR%\vswhere.exe" -prerel
     for /f "delims=" %%a in ('echo %%j ^| find "2017"') do (
         if not "%%a"=="" (
             echo Visual Studio 2017 environment detected...
-            call "%~0" "15" "%%j"
+            call "%~0" "15" "%%i:%%j"
             if not ERRORLEVEL 1 (
                 set MSVC15=1
                 set MSVCFOUND=1
